@@ -1,0 +1,20 @@
+# Object Detection and Scene Capture Summary System - Dependencies
+
+# Core Libraries
+ultralytics>=8.0.0          # YOLO implementation (auto-selects compatible version)
+opencv-python>=4.8.0        # Computer vision library
+numpy>=1.26.0               # Numerical computing (Python 3.13 compatible)
+torch>=2.1.0                # PyTorch for deep learning
+torchvision>=0.16.0         # Computer vision models
+
+# AI Caption Models
+transformers>=4.35.0        # Hugging Face transformers for BLIP
+accelerate>=0.25.0          # Accelerated model loading
+
+# Build dependencies
+setuptools>=65.0.0          # Required for building packages
+wheel>=0.38.0               # Required for building packages
+
+# Utility Libraries
+pillow>=10.0.0              # Image processing
+# matplotlib>=3.8.0         # Visualization (optional)
