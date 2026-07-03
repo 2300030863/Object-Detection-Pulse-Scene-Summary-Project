@@ -127,6 +127,86 @@ pip install -r requirements.txt
 ### Step 5: Model Download
 YOLO model (yolo11n.pt) automatically downloads on first run.
 
+**Note on Large Model Files:**
+The project contains large model files (`.pt` files) that are not tracked in Git to keep repository size manageable. These files are listed as **untracked** and must be added manually.
+
+#### Option A: Automatic Download (Recommended)
+Models automatically download on first run of any detection script:
+```bash
+python detect.py --image input/images/photo.jpg
+```
+The YOLO models will auto-download to:
+- `~/.cache/yolo/` (Linux/Mac)
+- `%APPDATA%\yolo\` (Windows)
+- `models/` directory (project folder)
+
+#### Option B: Manual Download
+If you need to pre-download models or use specific versions:
+
+1. **YOLOv11 Nano (recommended - 5.9MB):**
+   ```bash
+   yolo export model=yolo11n.pt format=pt
+   # Or download directly from Ultralytics
+   ```
+
+2. **YOLOv11 Small (more accurate - 24MB):**
+   ```bash
+   yolo export model=yolo11s.pt format=pt
+   ```
+
+3. **YOLOv8 Nano (legacy):**
+   ```bash
+   yolo export model=yolov8n.pt format=pt
+   ```
+
+Place downloaded `.pt` files in:
+```
+models/
+├── yolo11n.pt    # YOLOv11 Nano (primary)
+├── yolo11s.pt    # YOLOv11 Small (optional)
+└── yolov8n.pt    # YOLOv8 Nano (optional/legacy)
+```
+
+#### How to Add Large Files to Git (Optional)
+If you want to track these models in Git, use **Git LFS** (Large File Storage):
+
+1. **Install Git LFS:**
+   ```bash
+   # Windows
+   choco install git-lfs
+   # Or download from: https://git-lfs.github.com
+   
+   # Linux
+   sudo apt-get install git-lfs
+   
+   # Mac
+   brew install git-lfs
+   ```
+
+2. **Initialize Git LFS in the project:**
+   ```bash
+   git lfs install
+   ```
+
+3. **Track .pt files with Git LFS:**
+   ```bash
+   git lfs track "*.pt"
+   git add .gitattributes
+   ```
+
+4. **Add model files:**
+   ```bash
+   git add models/*.pt yolo*.pt
+   git commit -m "Add YOLO model files with Git LFS"
+   git push
+   ```
+
+**Why models are excluded by default:**
+- Model files are very large (5-100+ MB each)
+- They don't change frequently
+- They can be auto-downloaded by the framework
+- This keeps the repository lightweight (~13 MB vs ~250+ MB)
+
 ### Step 6: Run Detection
 ```bash
 # Detect in an image (auto-discovers images in input/images/)
